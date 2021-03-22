@@ -1,9 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hello Coursera</title>
+	<meta charset="utf-8">
+	<title>How to create List</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<style type="text/css">
+	/* Styles go here*/
+h1 {
+		color: green;
+		font-size: 36px;
+		text-align: center;
+	}
+header li {
+	list-style: none;
+}
+	a:link, a:visited{
+	text-decoration: none;
+	background-color: green;
+	border: 1px solid blue;
+	color: black;
+	display: block;
+	width: 200px;
+	text-align: center;
+	margin-bottom: 1px
+	}
+	a:hover, a:active{
+		background-color: red;
+		color: purple;
+	}
+	header li:nth-child(1){
+		font-size: 24px;
+	}
+	section li:nth-child(even){
+		background-color: gray;
+	}
+div, span{
+	background-color: blue;
+}
+</style>
 </head>
 <body>
-<h1>Hello Tu Mai! You can do it</h1> 
+	<h1>Unordered list</h1>
+	<header>
+		<ul>
+			<li><a href="https://www.chloeting.com/recipes/" target="_blank">Chloe Ting Recipes </a></li>
+			<li><a href="https://minimalistbaker.com/peanut-butter-overnight-oats/">Random Recipes</a></li>
+		</ul>
+	</header>
+<div>Meine Einkaufenliste</div> 
+<section>
+	<ul>
+		<li>Reis</li>
+		<li>Milch</li>
+		<li>Schlagsahne</li>
+		<li>Cherrytomaten</li>
+		<li>Baked Oats
+			<ul>
+				<li>Chocodrops</li>
+				<li>Zucker</li>
+				<li>Vanillaschote</li>
+				<li>Haferflocken</li>
+			</ul>
+		</li>
+		<li>Spinat</li>
+	</ul>
+</section>
+<div>Welcome back</div>
+<span>Tu Mai</span>
 </body>
 </html>
