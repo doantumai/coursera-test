@@ -1,0 +1,235 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6; /*extra space between lines, default 1.5*/
+}
+
+img {
+    max-width: 100%;
+    display: block;  /*check*/
+}
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+section {
+    padding: 7em 0;
+}
+
+.container {
+    width: 85%; /* to prevent things touching the sides*/
+    max-width: 65em;
+    margin: 0 auto;
+}
+
+.split {
+    display: flex; /* to have columns*/
+    gap: 1em; /* put a 1em space between the items*/
+    flex-wrap: wrap; /*if there is not enough room, instead of shrinking the items will stacked*/
+    justify-content: center;
+}
+
+.split > * { /* == .split > * */
+    flex-basis: 30%; /* to have columns again kinda change the width, if not, the div block will try to have 100% screen (default)*/
+    min-width: 15em;
+}
+/*Every tag that have a silbling before it (in this case a and p, h1 doesn't have a silbling before it so the margin will not be applied to h1)*/
+.spacing > * + *{ 
+    margin-top: var(--spacer, 2rem); /*if spacer does not work it would be 2rem*/
+}
+.btn {
+    display: inline-block; /*if dont the button may overlap the line above */
+    text-decoration: none;
+    color: var(--clr-text, white);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.125rem;
+    padding: .5em 1.25em; /*up-down side*/
+    background: var(--clr-accent, blue); /*--clr-accent is a css variable, gonne be default cause it is not defined yet*/
+    border-radius: .25em; /*corner of the button block to be bit rounder*/
+    transition: 
+        transform 250ms ease-in-out,
+        opacity 250ms linear;
+}
+
+.btn:hover,
+.btn:focus {
+    transform: scale(1.1); /* button becomes 1.1 bigger if being swiped on*/
+    opacity: .9; /*Undurchsichtigkeit*/
+}
+
+/* HEADER*/
+
+.primary-title {
+    font-size: 4rem;
+    font-size: clamp(3rem, calc(5vw + 1rem), 4.5rem); /*check*/
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.hero {
+    color: white;
+    text-align: center;
+    padding: 15em 0;
+    background-color: #444;
+    background-image: url(../img/shoe-3.png);
+    background-blend-mode: multiply;
+    background-attachment: fixed; /*background-img is fixed -> just to look cooler*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    --clr-accent: #faa700;
+
+    /*This does not work*/
+    @supports (background-blend-mode: multiply){
+        background-image: 
+            url(../img/shoe-3.png),
+            radial-gradient(#444, #111);
+            background-blend-mode: multiply
+    } /*a feature clearing*/
+    
+}
+/* HEADER END*/
+
+/* MAIN*/
+/* SECTION FEATURE*/
+.section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, calc(5vw + 1rem), 4rem);
+    line-height: 1; /*if not, when squezze the browser the space between lines will be to big*/
+    color: #4b7681;
+    margin-bottom: 5rem;
+}
+
+.featured {
+    background: #eee;
+}
+
+.featured_item {
+    display: block;
+    position: relative;
+    transform: scale(.85); /* adjust the size of the object*/
+    transition: transform 250ms ease-in-out; /*để không bị giật lúc di chuột qua*/
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    line-height: 1.2;
+} 
+.featured_item:hover, :focus {
+    transform: scale(1); /* make things grow a bit*/
+    /* .featured_details:hover, :focus {
+        opacity: 1;
+    } */
+}
+.featured_item:hover .featured_details, 
+.featured_item:focus .featured_details {
+    opacity: 1;
+    text-shadow: 0 0 2em rgba(#fff, 1);
+}  
+
+.featured_item::after {
+    content: '';
+    top: 10%;
+    left: 10%;
+    position: absolute;
+    padding: 75% 75% 0 0 ;
+    border-radius: 50%;
+    background-color: rgb(226, 217, 217);/* #2183b0;*/
+    z-index: -1; /* put the circles behind the items*/
+}
+.featured_item span {
+    display: block;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.featured_details {
+    opacity: 0;
+    transition: opacity 250ms linear;
+}
+/* END SECTION FEATURE*/
+
+/* SECTION OUR PRODUCT*/
+.product {
+    background: radial-gradient(var(--clr-inner, limegreen), var(--clr-outer, purple));
+    padding: 3em;
+    border-radius: 1em;
+    text-align: center;
+    margin-bottom: 5em;
+} 
+
+.product_title {
+    font-size: clamp(3rem, calc(5vw + 1rem), 5.5rem);
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 0 .2em rgba(#000, .2);
+}
+
+.product_image {
+    margin: -5em 0 0 0;
+}
+
+.shoe-red { /*This class muss be defined in the product*/
+    /* The way we set this up was we have a product and the product itself want to use the color
+    with the var(--clr-inner,...) if we define this var here, it will be applied for this product,
+    else if it does not exist the color after the ',' will be applied*/
+    --clr-inner: #faa700; /*This var was defined on line 161*/
+    --clr-outer: #e48d00;
+    --clr-accent: #a1173c; /*This var was definded on line 57*/
+/*Using custom properties like this is super powerful var(...,...)*/
+}
+
+.shoe-white {
+    --clr-inner: #fce4b3;
+    --clr-outer: #eac886;
+    --clr-accent: #2f4858;
+}
+
+.shoe-blue {
+    --clr-inner: #6dd5ed;
+    --clr-outer: #2193b0;
+    --clr-accent: #008951;
+}
+/* END SECTION OUR PRODUCT*/
+/************ Large devices only *************/
+@media (min-width: 1200px) {}
+
+/*********** Medium devices only *************/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/************* Small devices only *************/
+@media (min-width: 768px) and (max-width: 991px) {}
+.product{
+    text-align: left;
+    margin-bottom: 9em;
+}
+.product_title{
+    margin: 0;
+}
+.product_image {/*to make texts wrap around things*/
+    float: right; 
+    width: 65%;
+    shape-outside: url(../img/shoe-1.png);
+    shape-margin: 1em;
+    margin: 0 -5em 0 0; 
+}
+.shoe-white .product_image{
+    float: left;
+    shape-outside: url(../img/shoe-2.png);
+    shape-margin: 2em;
+    margin: 0 0 0 -5em;
+}
+/************ Extra small devices only ************/
+@media (max-width: 767px) {}
+
+/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
+@media (max-width: 479px) {}
